@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 
 class ArrayListData{
-    String name,address;
-    int number;
+    String name,address, number;
 
     public String getName() {
         return name;
@@ -23,11 +22,11 @@ class ArrayListData{
         this.address = address;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 }
@@ -43,7 +42,7 @@ class SQLC{
         try{
             pstmt=conn.prepareStatement("INSERT INTO phone VALUES (?,?,?)");
             pstmt.setString(1,d.getName());
-            pstmt.setInt(2,d.getNumber());
+            pstmt.setString(2,d.getNumber());
             pstmt.setString(3,d.getAddress());
             pstmt.executeUpdate();
         }
@@ -57,7 +56,7 @@ class SQLC{
         ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 System.out.print(rs.getString("name") + "/");
-                System.out.print(rs.getInt("phoneNumber") + "/");
+                System.out.print(rs.getString("phoneNumber") + "/");
                 System.out.print(rs.getString("address"));
                 System.out.println();
             }
@@ -72,7 +71,7 @@ class SQLC{
                 if (rs.getString("name").equals(name)) {
                     check=false;
                     System.out.print(rs.getString("name") + "/");
-                    System.out.print(rs.getInt("phoneNumber") + "/");
+                    System.out.print(rs.getString("phoneNumber") + "/");
                     System.out.print(rs.getString("address"));
                     System.out.println();
                 }
@@ -96,20 +95,19 @@ class InputClass
 {
     ArrayListData valueReturn(){
         ArrayListData d = new ArrayListData();
-        Scanner scS = new Scanner(System.in);
-        Scanner scI = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("이름 입력: ");
-        d.setName(scS.nextLine());
+        d.setName(sc.nextLine());
         System.out.println("전화번호 입력: ");
-        d.setNumber(scI.nextInt());
+        d.setNumber(sc.nextLine());
         System.out.println("주소 입력: ");
-        d.setAddress(scS.nextLine());
+        d.setAddress(sc.nextLine());
         return d;
     }
     String findString(){
-        Scanner scS = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("이름 입력: ");
-        return scS.next();
+        return sc.next();
     }
 }
 public class ArrayList {
